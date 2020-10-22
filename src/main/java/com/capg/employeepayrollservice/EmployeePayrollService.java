@@ -50,13 +50,29 @@ public class EmployeePayrollService {
 		}
 		return entries;
 	}
-	
+
 	public void printData(IOService fileIo) {
 		try {
 			Files.lines(new File("payroll-file.text").toPath()).forEach(System.out::println);
-		}
-		catch(IOException e) {
+		} catch (IOException e) {
 			e.printStackTrace();
+		}
+	}
+
+	public void readEmployeeData(IOService ioService) {
+		Scanner scanner = new Scanner(System.in);
+		if (ioService.equals(IOService.CONSOLE_IO)) {
+			System.out.println("Enter Employee ID : ");
+			int id = scanner.nextInt();
+			scanner.nextLine();
+			System.out.println("Enter Employee Name : ");
+			String name = scanner.nextLine();
+			System.out.println("Enter Employee Salary : ");
+			double salary = scanner.nextDouble();
+			empPayrollArray.add(new EmployeePayroll(id, name, salary));
+		} else if (ioService.equals(IOService.FILE_IO)) {
+			System.out.println("Reading data from file");
+			new EmployeePayrollFileIOService().printData();
 		}
 	}
 
