@@ -50,6 +50,15 @@ public class EmployeePayrollService {
 		}
 		return entries;
 	}
+	
+	public void printData(IOService fileIo) {
+		try {
+			Files.lines(new File("payroll-file.text").toPath()).forEach(System.out::println);
+		}
+		catch(IOException e) {
+			e.printStackTrace();
+		}
+	}
 
 	public static void main(String[] args) throws IOException {
 		ArrayList<EmployeePayroll> empPayrollArray = new ArrayList<EmployeePayroll>();
